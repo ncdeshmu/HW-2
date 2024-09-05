@@ -1,0 +1,85 @@
+```{r}
+#Nihar C. Deshmukh - ST 558 - HW 2
+```
+
+
+```{r}
+pretreatment <- c(120, 151, 125, 126, 115, 132, 132, 129, 134, 139, 127, 122, 127, 135, 133, 128, 147, 138, 140, 132)
+```
+
+```{r}
+names <- paste("Subject", 1:20, sep = "_")
+```
+
+
+```{r}
+posttreatment <- c(127, 145, 135, 122, 115, 122, 123, 126, 126, 129, 132, 146, 120, 114, 121, 120, 128, 120, 133, 115)
+```
+
+```{r}
+difftreatment <- posttreatment - pretreatment
+difftreatment
+```
+
+```{r}
+mean(difftreatment)
+```
+```{r}
+which(difftreatment < 0)
+```
+```{r}
+subset(difftreatment, difftreatment < 0)
+```
+
+
+
+```{r}
+mean(which(difftreatment<0))
+```
+
+```{r}
+treatment <- data.frame(names, pretreatment, posttreatment, difftreatment)
+treatment
+```
+
+```{r}
+subset(treatment, difftreatment < 0)
+```
+
+```{r}
+library(dplyr)
+
+treatment <- treatment %>% mutate(TRUEFALSE = ifelse(posttreatment < 120, "TRUE", 
+                                                     "FALSE"))
+```
+
+
+```{r}
+knitr::kable(treatment)
+```
+
+```{r}
+pretreatment1 <- c(138, 135, 147, 117, 152, 134, 114, 121, 131, 130)
+```
+
+```{r}
+posttreatment1 <- c(105, 136, 123, 130, 134, 143, 135, 139, 120, 124)
+```
+
+```{r}
+placebo = data.frame(pretreatment1, posttreatment1)
+```
+
+```{r}
+list <- list(treatment, placebo)
+list
+```
+```{r}
+#Using to get the first element of a list
+sapply(list,"[[",1)
+```
+```{r}
+#access the pre_bp column of the placebo data frame
+placebo$pretreatment1
+```
+
